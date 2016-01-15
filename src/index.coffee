@@ -1,7 +1,6 @@
 crypto = require 'crypto'
 path = require 'path'
 S3FS = require 's3fs'
-zlib = require 'zlib'
 
 
 fs = (bucket, config) ->
@@ -23,7 +22,6 @@ class MulterS3
 
 		@fs = fs bucket, {accessKeyId, secretAccessKey, region}
 		@getKey = opts.key or getKey
-		@gzip = opts.gzip ? true
 
 
 	_handleFile: (req, file, cb) ->
@@ -33,9 +31,7 @@ class MulterS3
 			f = file.stream
 			o = @fs.createWriteStream key
 
-			f.pipe zlib.createGzip() if @gzip
-			f.pipe o
-			f.on 'error', cb
+			f.pipe(o).on 'error', cb
 			o.on 'error', cb
 			o.on 'finish', -> cb null,
 				key: key
