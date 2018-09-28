@@ -1,6 +1,6 @@
 {
   "name": "multer-estree",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple streaming multer storage engine for S3.",
   "homepage": "https://github.com/kotarac/multer-estree",
   "bugs": "https://github.com/kotarac/multer-estree/issues",
